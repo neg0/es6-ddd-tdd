@@ -1,0 +1,41 @@
+{
+  "name": "es6-playground",
+  "version": "1.0.0",
+  "description": "Me and ES6! I will organise this for training my team",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel ./src --experimental --source-maps-inline -d ./build",
+    "test": "jest ./tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neg0/es6.git"
+  },
+  "keywords": [
+    "es6",
+    "js",
+    "2017"
+  ],
+  "author": "Hadi T",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/neg0/es6/issues"
+  },
+  "homepage": "https://github.com/neg0/es6#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@negative0/jasmine-dataprovider": "^1.0.1",
+    "@types/jest": "^23.3.9",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "jest": "^23.6.0"
+  },
+  "jest": {
+    "verbose": true,
+    "collectCoverage": true,
+    "coverageReporters": [
+      "json",
+      "html"
+    ]
+  }
+}
