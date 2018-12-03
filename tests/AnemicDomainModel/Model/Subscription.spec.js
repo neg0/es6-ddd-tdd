@@ -73,11 +73,54 @@ describe("Testing Subscription (Anemic Domain Model", () => {
 
         describe("when new name being set", () => {
             beforeEach(() => {
-                sut.id = 888;
+                const mockedName = jest.genMockFromModule("../../../src/Common/ValueObject/Name");
+                mockedName.value = 'John Doe';
+
+                sut.name = mockedName;
             });
 
             it("should have a new Name `John Doe`", () => {
                 expect(sut.name.value).toEqual("John Doe");
+            });
+        });
+
+        describe("when new email being set", () => {
+            beforeEach(() => {
+                const mockedEmail = jest.genMockFromModule("../../../src/Common/ValueObject/Email");
+                mockedEmail.value = "john@github.com";
+
+                sut.email = mockedEmail;
+            });
+
+            it("should have a new Name `John Doe`", () => {
+                expect(sut.email.value).toEqual("john@github.com");
+            });
+        });
+
+        describe("when new expirationDate being set", () => {
+            const now = new Date();
+            beforeEach(() => {
+                const mockedExpirationDate = jest.genMockFromModule("../../../src/Common/ValueObject/ExpirationDate");
+                mockedExpirationDate.value = now;
+
+                sut.expirationDate = mockedExpirationDate;
+            });
+
+            it("should have a new date and time", () => {
+                expect(sut.expirationDate.value).toEqual(now);
+            });
+        });
+
+        describe("when new status being set `PENDING`", () => {
+            beforeEach(() => {
+                const mockedStatus = jest.genMockFromModule("../../../src/Common/ValueObject/Status");
+                mockedStatus.value = Status.STATUSES.pending;
+
+                sut.status = mockedStatus;
+            });
+
+            it("should have a new status and time", () => {
+                expect(sut.status.value).toEqual(Status.STATUSES.pending);
             });
         });
     });
