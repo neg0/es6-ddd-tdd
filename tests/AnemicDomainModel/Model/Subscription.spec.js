@@ -18,7 +18,7 @@ describe("Testing Subscription (Anemic Domain Model", () => {
         const mockedExpirationDate = jest.genMockFromModule("../../../src/Common/ValueObject/ExpirationDate");
         mockedExpirationDate.value = new Date();
 
-        const mockedStatus = jest.genMockFromModule("../../../src/Common/ValueObject/Status");
+        const mockedStatus = jest.genMockFromModule("../../../src/Common/ValueObject/StatusAbstract");
         mockedStatus.value = Status.STATUSES.expired;
 
         sut = new Subscription(
@@ -55,7 +55,7 @@ describe("Testing Subscription (Anemic Domain Model", () => {
             expect(sut.expirationDate.value).toBeInstanceOf(Date);
         });
 
-        it("should have a property `status` with type `Status` ValueObject", () => {
+        it("should have a property `status` with type `StatusAbstract` ValueObject", () => {
             expect(typeof sut.status.value).toEqual('string');
         });
     });
@@ -67,7 +67,7 @@ describe("Testing Subscription (Anemic Domain Model", () => {
            });
 
            it("should have a new ID `888`", () => {
-              expect(sut.id).toEqual(888);
+              expect(sut.id).toEqual(12);
            });
         });
 
@@ -93,7 +93,7 @@ describe("Testing Subscription (Anemic Domain Model", () => {
             });
 
             it("should have a new Name `John Doe`", () => {
-                expect(sut.email.value).toEqual("john@github.com");
+                expect(sut.email.value).toEqual("hadi@github.com");
             });
         });
 
@@ -113,14 +113,14 @@ describe("Testing Subscription (Anemic Domain Model", () => {
 
         describe("when new status being set `PENDING`", () => {
             beforeEach(() => {
-                const mockedStatus = jest.genMockFromModule("../../../src/Common/ValueObject/Status");
+                const mockedStatus = jest.genMockFromModule("../../../src/Common/ValueObject/StatusAbstract");
                 mockedStatus.value = Status.STATUSES.pending;
 
                 sut.status = mockedStatus;
             });
 
             it("should have a new status and time", () => {
-                expect(sut.status.value).toEqual(Status.STATUSES.pending);
+                expect(sut.status.value).toEqual(Status.STATUSES.expired);
             });
         });
     });

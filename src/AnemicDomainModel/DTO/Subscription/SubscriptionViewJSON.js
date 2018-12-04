@@ -1,15 +1,23 @@
 import { Subscription } from "../../Model/Subscription";
+import { DataTransferViewInterface } from "../DataTransferViewInterface";
 
-export class SubscriptionViewJSON {
+export class SubscriptionViewJSON extends DataTransferViewInterface {
     /**
      * @param {Subscription} subscription
      */
     constructor(subscription) {
+        super();
         this.subscription = subscription;
     }
 
     /**
-     * @return {{id: number, name: string, email: string, expiration: string, status: string}}
+     * @return {{
+     *  id: number,
+     *  name: string,
+     *  email: string,
+     *  expiration: string,
+     *  status: string
+     * }}
      */
     view() {
         return {

@@ -24,10 +24,10 @@ export class Subscription {
     }
 
     /**
-     * @param {number} id
+     * @throws {Error}
      */
     set id(id) {
-        this._id = id;
+        throw new Error('setting `id` is not allowed, since visibility protected does not exist in ES6');
     }
 
     /**
@@ -38,10 +38,10 @@ export class Subscription {
     }
 
     /**
-     * @param {Name} name
+     * @throws {Error}
      */
     set name(name) {
-        this._name = name;
+        throw new Error('setting `name` is not allowed, since visibility protected does not exist in ES6');
     }
 
     /**
@@ -52,10 +52,10 @@ export class Subscription {
     }
 
     /**
-     * @param {Email} email
+     * @throws {Error}
      */
     set email(email) {
-        this._email = email;
+        throw new Error('setting `email` is not allowed, since visibility protected does not exist in ES6');
     }
 
     /**
@@ -66,10 +66,11 @@ export class Subscription {
     }
 
     /**
-     * @param {ExpirationDate} date
+     * @param date {ExpirationDate}
+     * @throws {Error}
      */
     set expirationDate(date) {
-        this._expirationDate = date;
+        throw new Error('setting `expirationDate` is not allowed, since visibility protected does not exist in ES6');
     }
 
     /**
@@ -80,9 +81,9 @@ export class Subscription {
     }
 
     /**
-     * @param {Status} status
+     * @throws {Error}
      */
     set status(status) {
-        this._status = status;
+        throw new Error('setting `status` is not allowed');
     }
 }

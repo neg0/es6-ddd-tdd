@@ -3,22 +3,21 @@ import { Email } from "../../../Common/ValueObject/Email";
 import { ExpirationDate } from "../../../Common/ValueObject/ExpirationDate";
 import { Status} from "../../../Common/ValueObject/Status";
 import { Subscription } from "../../Model/Subscription";
+import { DataTransferCreateInterface } from "../DataTransferCreateInterface";
 
-export class SubscriptionCreation extends DataTransferCreationInterface {
+export class SubscriptionCreation extends DataTransferCreateInterface {
     /**
      * @param {number} id
      * @param {string} name
      * @param {string} email
      * @param {Date} expirationDate
-     * @param {string} status
      */
-    constructor(id, name, email, expirationDate, status) {
+    constructor(id, name, email, expirationDate) {
         super();
         this.id = id;
         this.name = name;
         this.email = email;
         this.expirationDate = expirationDate;
-        this.status = status
     }
 
     /**
