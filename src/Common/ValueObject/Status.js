@@ -1,10 +1,10 @@
 import { ValueObjectInterface } from "./ValueObjectInterface";
 import { Expired } from "./Status/Expired";
 import { StatusAbstract } from "./Status/StatusAbstract";
-import {Active} from "./Status/Active";
-import {Suspended} from "./Status/Suspended";
-import {Frozen} from "./Status/Frozen";
-import {StatusType} from "./Status/StatusType";
+import { Active } from "./Status/Active";
+import { Suspended } from "./Status/Suspended";
+import { Frozen } from "./Status/Frozen";
+import { StatusType } from "./Status/StatusType";
 
 export class Status extends ValueObjectInterface {
     static get STATUSES() {
