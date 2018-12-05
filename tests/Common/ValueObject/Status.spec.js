@@ -4,27 +4,12 @@ import { Active } from "../../../src/Common/ValueObject/Status/Active";
 import { Expired } from "../../../src/Common/ValueObject/Status/Expired";
 import { Suspended } from "../../../src/Common/ValueObject/Status/Suspended";
 import { Frozen } from "../../../src/Common/ValueObject/Status/Frozen";
+import { dateGenerator } from "../../DateHelper";
 
-/**
- * @param {number} days
- * @param {boolean} future
- * @return {Date}
- */
-const dateGenerator = function(days, future = true) {
-    const now = new Date();
-    if (false === future) {
-        now.setDate(now.getDate() - days);
-    }
-    now.setDate(now.getDate() + days);
-
-    return now;
-};
-
-describe("testing status value given", () => {
-    /**
-     * @type {Status}
-     */
+describe("Testing `Status` ValueObject", () => {
+    /** @type {Status} */
     let sut = undefined;
+
     /** @type Active */
     let MockedActiveStatus = undefined;
     /** @type Expired */

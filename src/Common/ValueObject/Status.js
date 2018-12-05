@@ -7,14 +7,6 @@ import { Frozen } from "./Status/Frozen";
 import { StatusType } from "./Status/StatusType";
 
 export class Status extends ValueObjectInterface {
-    static get STATUSES() {
-        return {
-            active: 'ACTIVE',
-            expired: 'EXPIRED',
-            suspended: 'SUSPENDED',
-        }
-    };
-
     /**
      * @param {StatusAbstract} status
      */
@@ -56,11 +48,36 @@ export class Status extends ValueObjectInterface {
         throw new Error("Violation of rule to be able to set the value in ValueObject(s)");
     }
 
+    /**
+     * @param {Date} date
+     */
     suspend(date) {
         this._value = new Suspended(date);
     }
 
+    /**
+     * @param {Date} date
+     */
+    unsuspend(date) {
+        if (date < new Date()) {
+            throw new Error("Can not unsuspend with date in the past");
+        }
+
+        this._value = new Active(date);
+    }
+
+    /**
+     * @param {Date} date
+     */
     freeze(date) {
         this._value = new Frozen(date);
     }
+
+    /**
+     * @throws {Error}
+     */
+    unfreeze() {
+        throw new Error("You may not unfreeze from Status object (Only allowed from Subscription Object)");
+    }
 }
+

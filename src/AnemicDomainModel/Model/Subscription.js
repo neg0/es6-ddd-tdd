@@ -19,11 +19,15 @@ export class Subscription {
         this._status = status
     }
 
+    /**
+     * @return {number}
+     */
     get id() {
         return this._id;
     }
 
     /**
+     * @param {number} id
      * @throws {Error}
      */
     set id(id) {
@@ -38,6 +42,7 @@ export class Subscription {
     }
 
     /**
+     * @param {Name} name
      * @throws {Error}
      */
     set name(name) {
@@ -52,6 +57,7 @@ export class Subscription {
     }
 
     /**
+     * @param {Email} email
      * @throws {Error}
      */
     set email(email) {
@@ -81,6 +87,7 @@ export class Subscription {
     }
 
     /**
+     * @param {Status} status
      * @throws {Error}
      */
     set status(status) {

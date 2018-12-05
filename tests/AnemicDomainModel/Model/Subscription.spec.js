@@ -1,5 +1,6 @@
 import { Subscription } from "../../../src/AnemicDomainModel/Model/Subscription";
 import { Status } from "../../../src/Common/ValueObject/Status";
+import {StatusType} from "../../../src/Common/ValueObject/Status/StatusType";
 
 
 describe("Testing Subscription (Anemic Domain Model", () => {
@@ -19,7 +20,7 @@ describe("Testing Subscription (Anemic Domain Model", () => {
         mockedExpirationDate.value = new Date();
 
         const mockedStatus = jest.genMockFromModule("../../../src/Common/ValueObject/Status");
-        mockedStatus.value = Status.STATUSES.expired;
+        mockedStatus.value = StatusType.expired;
 
         sut = new Subscription(
             mockedId,
@@ -60,18 +61,19 @@ describe("Testing Subscription (Anemic Domain Model", () => {
         });
     });
 
-    xdescribe("checking the ability of updating each property after instantiation of `Subscription`", () => {
+    describe("checking the ability of updating each property after instantiation of `Subscription`", () => {
         describe("when new id being set", () => {
-           beforeEach(() => {
-               sut.id = 888;
-           });
-
-           it("should have a new ID `888`", () => {
-              expect(sut.id).toEqual(12);
+           it("should not be able to update ID to `888`", () => {
+               try {
+                   sut.id = 888;
+               } catch (e) {
+                   expect(e).toBeInstanceOf(Error);
+                   expect(sut.id).toEqual(12);
+               }
            });
         });
 
-        describe("when new name being set", () => {
+        xdescribe("when new name being set", () => {
             beforeEach(() => {
                 const mockedName = jest.genMockFromModule("../../../src/Common/ValueObject/Name");
                 mockedName.value = 'John Doe';
@@ -84,7 +86,7 @@ describe("Testing Subscription (Anemic Domain Model", () => {
             });
         });
 
-        describe("when new email being set", () => {
+        xdescribe("when new email being set", () => {
             beforeEach(() => {
                 const mockedEmail = jest.genMockFromModule("../../../src/Common/ValueObject/Email");
                 mockedEmail.value = "john@github.com";
@@ -97,7 +99,7 @@ describe("Testing Subscription (Anemic Domain Model", () => {
             });
         });
 
-        describe("when new expirationDate being set", () => {
+        xdescribe("when new expirationDate being set", () => {
             const now = new Date();
             beforeEach(() => {
                 const mockedExpirationDate = jest.genMockFromModule("../../../src/Common/ValueObject/ExpirationDate");
@@ -111,7 +113,7 @@ describe("Testing Subscription (Anemic Domain Model", () => {
             });
         });
 
-        describe("when new status being set `PENDING`", () => {
+        xdescribe("when new status being set `PENDING`", () => {
             beforeEach(() => {
                 const mockedStatus = jest.genMockFromModule("../../../src/Common/ValueObject/StatusAbstract");
                 mockedStatus.value = Status.STATUSES.pending;
