@@ -19,18 +19,19 @@ export class Status extends ValueObjectInterface {
     /**
      * @param {string|undefined} type
      * @param {Date} date
+     * @return {Status}
      */
     static create(date, type = undefined) {
         switch (type) {
             case StatusType.suspended:
-                return this._value = new Status(new Suspended(date));
+                return new Status(new Suspended(date));
             case StatusType.frozen:
-                return this._value = new Status(new Frozen(date));
+                return new Status(new Frozen(date));
             default:
                 if (date < new Date()) {
-                    return this._value = new Status(new Expired(date));
+                    return new Status(new Expired(date));
                 }
-                return this._value = new Status(new Active(date));
+                return new Status(new Active(date));
         }
     }
 

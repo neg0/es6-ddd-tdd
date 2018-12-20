@@ -7,7 +7,7 @@ export class Expired extends StatusAbstract {
      */
     constructor(date) {
         super(date);
-        if (date <= new Date()) {
+        if (date >= new Date()) {
             throw new Error(Expired.error);
         }
     }

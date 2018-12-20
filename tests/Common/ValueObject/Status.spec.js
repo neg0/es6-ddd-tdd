@@ -197,7 +197,7 @@ describe("Testing `Status` ValueObject", () => {
 
     describe("checking variation of expiry date", () => {
         beforeEach(() => {
-            sut = Status.create(dateGenerator(14, false));
+            sut = Status.create(dateGenerator(24, false));
         });
 
         afterEach(() => {

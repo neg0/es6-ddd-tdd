@@ -1,7 +1,5 @@
 import { Subscription } from "../../../src/AnemicDomainModel/Model/Subscription";
-import { Status } from "../../../src/Common/Model/Status";
-import {StatusType} from "../../../src/Common/ValueObject/Status/StatusType";
-
+import { StatusType } from "../../../src/Common/ValueObject/Status/StatusType";
 
 describe("Testing Subscription (Anemic Domain Model", () => {
     /** @type {Subscription} */
@@ -19,7 +17,7 @@ describe("Testing Subscription (Anemic Domain Model", () => {
         const mockedExpirationDate = jest.genMockFromModule("../../../src/Common/ValueObject/ExpirationDate");
         mockedExpirationDate.value = new Date();
 
-        const mockedStatus = jest.genMockFromModule("../../../src/Common/ValueObject/Status");
+        const mockedStatus = jest.genMockFromModule("../../../src/Common/Model/Status");
         mockedStatus.value = StatusType.expired;
 
         sut = new Subscription(
@@ -90,7 +88,6 @@ describe("Testing Subscription (Anemic Domain Model", () => {
                 } catch (e) {
                     expect(e).toBeInstanceOf(Error);
                 }
-                // expect(sut.name.value).toEqual("John Doe");
             });
         });
 
@@ -138,7 +135,7 @@ describe("Testing Subscription (Anemic Domain Model", () => {
         describe("when new status being set `SUSPENDED`", () => {
             let mockedStatus = undefined;
             beforeEach(() => {
-                mockedStatus = jest.genMockFromModule("../../../src/Common/ValueObject/Status");
+                mockedStatus = jest.genMockFromModule("../../../src/Common/Model/Status");
                 mockedStatus.value = StatusType.suspended;
             });
 
