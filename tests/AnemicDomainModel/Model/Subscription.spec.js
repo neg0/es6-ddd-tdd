@@ -1,5 +1,5 @@
 import { Subscription } from "../../../src/AnemicDomainModel/Model/Subscription";
-import { Status } from "../../../src/Common/ValueObject/Status";
+import { Status } from "../../../src/Common/Model/Status";
 import {StatusType} from "../../../src/Common/ValueObject/Status/StatusType";
 
 

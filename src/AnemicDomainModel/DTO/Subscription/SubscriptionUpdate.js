@@ -1,6 +1,6 @@
 import { DataTransferUpdateInterface } from "../DataTransferUpdateInterface";
 import { Email } from "../../../Common/ValueObject/Email";
-import { Status } from "../../../Common/ValueObject/Status";
+import { Status } from "../../../Common/Model/Status";
 import { ExpirationDate } from "../../../Common/ValueObject/ExpirationDate";
 import { Name } from "../../../Common/ValueObject/Name";
 

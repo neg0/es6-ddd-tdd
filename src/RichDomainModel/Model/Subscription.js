@@ -1,16 +1,17 @@
 import { Name } from "../../Common/ValueObject/Name";
 import { Email } from "../../Common/ValueObject/Email";
 import { ExpirationDate } from "../../Common/ValueObject/ExpirationDate";
-import { Status } from "../../Common/ValueObject/Status";
+import { Status } from "../../Common/Model/Status";
 import { Frozen } from "../../Common/ValueObject/Status/Frozen";
 
 export class Subscription {
     /**
+     * This to be considered as private method (Only instantiable via static `create`)
      * @param {number} id
      * @param {Name} name
      * @param {Email} email
-     * @param {Status} status
      * @param {ExpirationDate} expirationDate
+     * @param {Status} status
      */
     constructor(id, name, email, expirationDate, status) {
         this.id = id;

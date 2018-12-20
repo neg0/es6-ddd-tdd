@@ -1,13 +1,14 @@
-import { ValueObjectInterface } from "./ValueObjectInterface";
-import { Expired } from "./Status/Expired";
-import { StatusAbstract } from "./Status/StatusAbstract";
-import { Active } from "./Status/Active";
-import { Suspended } from "./Status/Suspended";
-import { Frozen } from "./Status/Frozen";
-import { StatusType } from "./Status/StatusType";
+import { ValueObjectInterface } from "../ValueObject/ValueObjectInterface";
+import { Expired } from "../ValueObject/Status/Expired";
+import { StatusAbstract } from "../ValueObject/Status/StatusAbstract";
+import { Active } from "../ValueObject/Status/Active";
+import { Suspended } from "../ValueObject/Status/Suspended";
+import { Frozen } from "../ValueObject/Status/Frozen";
+import { StatusType } from "../ValueObject/Status/StatusType";
 
 export class Status extends ValueObjectInterface {
     /**
+     * This to be considered as private method (Only instantiable via static `create`)
      * @param {StatusAbstract} status
      */
     constructor(status) {
@@ -22,14 +23,14 @@ export class Status extends ValueObjectInterface {
     static create(date, type = undefined) {
         switch (type) {
             case StatusType.suspended:
-                return new Status(new Suspended(date));
+                return this._value = new Status(new Suspended(date));
             case StatusType.frozen:
-                return new Status(new Frozen(date));
+                return this._value = new Status(new Frozen(date));
             default:
                 if (date < new Date()) {
-                    return new Status(new Expired(date));
+                    return this._value = new Status(new Expired(date));
                 }
-                return new Status(new Active(date));
+                return this._value = new Status(new Active(date));
         }
     }
 
@@ -53,6 +54,8 @@ export class Status extends ValueObjectInterface {
      */
     suspend(date) {
         this._value = new Suspended(date);
+
+        return this;
     }
 
     /**
@@ -64,6 +67,8 @@ export class Status extends ValueObjectInterface {
         }
 
         this._value = new Active(date);
+
+        return this;
     }
 
     /**

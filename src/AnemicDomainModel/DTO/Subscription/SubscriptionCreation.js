@@ -1,7 +1,7 @@
 import { Name } from "../../../Common/ValueObject/Name";
 import { Email } from "../../../Common/ValueObject/Email";
 import { ExpirationDate } from "../../../Common/ValueObject/ExpirationDate";
-import { Status} from "../../../Common/ValueObject/Status";
+import { Status} from "../../../Common/Model/Status";
 import { Subscription } from "../../Model/Subscription";
 import { DataTransferCreateInterface } from "../DataTransferCreateInterface";
 

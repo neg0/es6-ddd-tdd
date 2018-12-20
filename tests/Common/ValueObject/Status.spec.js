@@ -1,4 +1,4 @@
-import { Status } from "../../../src/Common/ValueObject/Status";
+import { Status } from "../../../src/Common/Model/Status";
 import { StatusType } from "../../../src/Common/ValueObject/Status/StatusType";
 import { Active } from "../../../src/Common/ValueObject/Status/Active";
 import { Expired } from "../../../src/Common/ValueObject/Status/Expired";
