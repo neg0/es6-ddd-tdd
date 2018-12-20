@@ -1,9 +1,30 @@
-import {DataTransferUpdateInterface} from "../DataTransferUpdateInterface";
+import { DataTransferUpdateInterface } from "../DataTransferUpdateInterface";
+import { Email } from "../../../Common/ValueObject/Email";
+import { Status } from "../../../Common/ValueObject/Status";
+import { ExpirationDate } from "../../../Common/ValueObject/ExpirationDate";
+import { Name } from "../../../Common/ValueObject/Name";
 
 export class SubscriptionUpdate extends DataTransferUpdateInterface {
-    constructor() {
+    constructor(subscription) {
         super();
+        this._subscription = subscription;
     }
 
-    update() {}
+    /**
+     * @param {{
+     *  name: string,
+     *  email: string,
+     *  expirationDate: Date,
+     *  status: string|undefined
+     * }} data
+     * @return {Subscription}
+     */
+    update(data) {
+        this._subscription.name = new Name(data.name);
+        this._subscription.email = new Email(data.email);
+        this._subscription.expirationDate = new ExpirationDate(data.expirationDate);
+        this._subscription.status = Status.create(this.expirationDate.value, data.status);
+
+        return this._subscription;
+    }
 }

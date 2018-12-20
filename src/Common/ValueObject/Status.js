@@ -34,10 +34,10 @@ export class Status extends ValueObjectInterface {
     }
 
     /**
-     * @return {string}
+     * @return {ValueObjectInterface}
      */
     get value() {
-        return this._value.status;
+        return this._value;
     }
 
     /**
@@ -71,6 +71,8 @@ export class Status extends ValueObjectInterface {
      */
     freeze(date) {
         this._value = new Frozen(date);
+
+        return this;
     }
 
     /**
@@ -80,4 +82,3 @@ export class Status extends ValueObjectInterface {
         throw new Error("You may not unfreeze from Status object (Only allowed from Subscription Object)");
     }
 }
-

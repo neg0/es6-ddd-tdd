@@ -41,7 +41,7 @@ describe("Testing `Status` ValueObject", () => {
         });
 
         it("should return status `Active` when expirationDate is in the future", () => {
-            expect(sut.value).toEqual(StatusType.active);
+            expect(sut.value.status).toEqual(StatusType.active);
         });
 
         describe("checking error detection upon initialisation", () => {
@@ -78,7 +78,7 @@ describe("Testing `Status` ValueObject", () => {
         });
 
         it("should have status value `EXPIRED`", () => {
-            expect(sut.value).toEqual(StatusType.expired);
+            expect(sut.value.status).toEqual(StatusType.expired);
         });
 
         describe("checking error detection upon initialisation", () => {
@@ -115,7 +115,7 @@ describe("Testing `Status` ValueObject", () => {
         });
 
         it("should have status value `SUSPENDED`", () => {
-            expect(sut.value).toEqual(StatusType.suspended);
+            expect(sut.value.status).toEqual(StatusType.suspended);
         });
 
         describe("checking error detection upon initialisation", () => {
@@ -152,7 +152,7 @@ describe("Testing `Status` ValueObject", () => {
         });
 
         it("should have status value `FROZEN`", () => {
-            expect(sut.value).toEqual(StatusType.frozen);
+            expect(sut.value.status).toEqual(StatusType.frozen);
         });
 
         describe("checking error detection upon initialisation", () => {
@@ -164,6 +164,48 @@ describe("Testing `Status` ValueObject", () => {
                     expect(e.message).toEqual(Frozen.error);
                 }
             });
+        });
+
+        describe("checking `SUSPENDED` status creation", () => {
+           beforeEach(() => {
+               sut = Status.create(dateGenerator(14), StatusType.suspended);
+           });
+
+           afterEach(() => {
+               sut = undefined;
+           });
+
+           it("should have status `SUSPENDED` with expiry two weeks in the future", () => {
+               expect(sut.value).toBeInstanceOf(Suspended);
+           });
+        });
+
+        describe("checking `FROZEN` status creation", () => {
+            beforeEach(() => {
+                sut = Status.create(dateGenerator(14), StatusType.frozen);
+            });
+
+            afterEach(() => {
+                sut = undefined;
+            });
+
+            it("should have status `FROZEN` with expiry two weeks in the future", () => {
+                expect(sut.value).toBeInstanceOf(Frozen);
+            });
+        });
+    });
+
+    describe("checking variation of expiry date", () => {
+        beforeEach(() => {
+            sut = Status.create(dateGenerator(14, false));
+        });
+
+        afterEach(() => {
+            sut = undefined;
+        });
+
+        it("should have status `EXPIRED` with expiry two weeks in the future", () => {
+            expect(sut.value).toBeInstanceOf(Expired);
         });
     });
 });

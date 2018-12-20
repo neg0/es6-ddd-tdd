@@ -2,6 +2,9 @@ import { StatusAbstract } from "./StatusAbstract";
 import { StatusType } from "./StatusType";
 
 export class Frozen extends StatusAbstract {
+    /**
+     * @inheritDoc
+     */
     constructor(date) {
         super(date);
 

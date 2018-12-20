@@ -1,6 +1,6 @@
 import { SubscriptionViewJSON } from "../../../../src/AnemicDomainModel/DTO/Subscription/SubscriptionViewJSON";
 
-xdescribe("Testing SubscriptionView DTO for JSON", () => {
+describe("Testing SubscriptionView DTO for JSON", () => {
     /**
      * @type {SubscriptionViewJSON}
      */

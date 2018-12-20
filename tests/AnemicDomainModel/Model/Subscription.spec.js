@@ -73,56 +73,85 @@ describe("Testing Subscription (Anemic Domain Model", () => {
            });
         });
 
-        xdescribe("when new name being set", () => {
+        describe("when new name being set", () => {
+            let mockedName = undefined;
             beforeEach(() => {
-                const mockedName = jest.genMockFromModule("../../../src/Common/ValueObject/Name");
+                mockedName = jest.genMockFromModule("../../../src/Common/ValueObject/Name");
                 mockedName.value = 'John Doe';
-
-                sut.name = mockedName;
             });
 
-            it("should have a new Name `John Doe`", () => {
-                expect(sut.name.value).toEqual("John Doe");
+            afterEach(() => {
+                mockedName = undefined;
+            });
+
+            it("should throw an error", () => {
+                try {
+                    sut.name = mockedName;
+                } catch (e) {
+                    expect(e).toBeInstanceOf(Error);
+                }
+                // expect(sut.name.value).toEqual("John Doe");
             });
         });
 
-        xdescribe("when new email being set", () => {
+        describe("when new email being set", () => {
+            let mockedEmail = undefined;
             beforeEach(() => {
-                const mockedEmail = jest.genMockFromModule("../../../src/Common/ValueObject/Email");
+                mockedEmail = jest.genMockFromModule("../../../src/Common/ValueObject/Email");
                 mockedEmail.value = "john@github.com";
-
-                sut.email = mockedEmail;
             });
 
-            it("should have a new Name `John Doe`", () => {
-                expect(sut.email.value).toEqual("hadi@github.com");
+            afterEach(() => {
+                mockedEmail = undefined;
+            });
+
+            it("should throw an error", () => {
+                try {
+                    sut.email = mockedEmail;
+                } catch (e) {
+                    expect(e).toBeInstanceOf(Error);
+                }
             });
         });
 
-        xdescribe("when new expirationDate being set", () => {
+        describe("when new expirationDate being set", () => {
             const now = new Date();
+            let mockedExpirationDate = undefined;
             beforeEach(() => {
-                const mockedExpirationDate = jest.genMockFromModule("../../../src/Common/ValueObject/ExpirationDate");
+                mockedExpirationDate = jest.genMockFromModule("../../../src/Common/ValueObject/ExpirationDate");
                 mockedExpirationDate.value = now;
+            });
 
-                sut.expirationDate = mockedExpirationDate;
+            afterEach(() => {
+                mockedExpirationDate = undefined;
             });
 
             it("should have a new date and time", () => {
-                expect(sut.expirationDate.value).toEqual(now);
+                try {
+                    sut.expirationDate = mockedExpirationDate;
+                } catch (e) {
+                    expect(e).toBeInstanceOf(Error);
+                }
             });
         });
 
-        xdescribe("when new status being set `PENDING`", () => {
+        describe("when new status being set `SUSPENDED`", () => {
+            let mockedStatus = undefined;
             beforeEach(() => {
-                const mockedStatus = jest.genMockFromModule("../../../src/Common/ValueObject/StatusAbstract");
-                mockedStatus.value = Status.STATUSES.pending;
+                mockedStatus = jest.genMockFromModule("../../../src/Common/ValueObject/Status");
+                mockedStatus.value = StatusType.suspended;
+            });
 
-                sut.status = mockedStatus;
+            afterEach(() => {
+                mockedStatus = undefined;
             });
 
             it("should have a new status and time", () => {
-                expect(sut.status.value).toEqual(Status.STATUSES.expired);
+                try {
+                    sut.status = mockedStatus;
+                } catch (e) {
+                    expect(e).toBeInstanceOf(Error);
+                }
             });
         });
     });

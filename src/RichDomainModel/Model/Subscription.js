@@ -2,11 +2,9 @@ import { Name } from "../../Common/ValueObject/Name";
 import { Email } from "../../Common/ValueObject/Email";
 import { ExpirationDate } from "../../Common/ValueObject/ExpirationDate";
 import { Status } from "../../Common/ValueObject/Status";
-import { SubscriptionViewAbstract } from "../SubscriptionViewAbstract";
-import {Frozen} from "../../Common/ValueObject/Status/Frozen";
-import {Active} from "../../Common/ValueObject/Status/Active";
+import { Frozen } from "../../Common/ValueObject/Status/Frozen";
 
-export class Subscription extends SubscriptionViewAbstract {
+export class Subscription {
     /**
      * @param {number} id
      * @param {Name} name
@@ -15,7 +13,6 @@ export class Subscription extends SubscriptionViewAbstract {
      * @param {ExpirationDate} expirationDate
      */
     constructor(id, name, email, expirationDate, status) {
-        super();
         this.id = id;
         this.name = name;
         this.email = email;
@@ -42,19 +39,43 @@ export class Subscription extends SubscriptionViewAbstract {
     }
 
     /**
-     * @return {boolean}
+     * @param {{
+     *  name: string,
+     *  email: string,
+     *  expirationDate: Date
+     * }} data
+     * @return {Subscription}
+     */
+    update(data) {
+        this.name = data.name ? new Name(data.name) : this.name;
+        this.email = data.email ? new Email(data.email) : this.email;
+        this.expirationDate = data.expirationDate ?
+            new ExpirationDate(data.expirationDate) :
+            this.expirationDate;
+
+        return this;
+    }
+
+    /**
+     * @return {Subscription}
      * @throws {Error}
      */
     unfreeze() {
-        if (this.status.value instanceof Frozen) {
-            // Add this.status.value.date to date
-            // Add difference to expirationDate
-            this.status = Status.create(new Date());
-
-            return true;
+        if (false === this.status.value instanceof Frozen) {
+            throw new Error("Subscription is not Frozen!");
         }
 
-        throw new Error("Not available for this subscription");
+        const frozenDate = this.status.value.date;
+        const oneDayInMilliSecond = 1000 * 60 * 60 * 24;
+        const dateDiff = (new Date() - frozenDate) / oneDayInMilliSecond;
+
+        let expirationDate = this.expirationDate.value;
+        expirationDate.setDate(expirationDate.getDate() + dateDiff);
+
+        this.expirationDate = new ExpirationDate(expirationDate);
+        this.status = Status.create(expirationDate);
+
+        return this;
     }
 
     /**
@@ -73,5 +94,12 @@ export class Subscription extends SubscriptionViewAbstract {
             expiration: this.expirationDate.value.toLocaleDateString(),
             status:this.status.value,
         };
+    }
+
+    /**
+     * @return {string}
+     */
+    toString() {
+        return JSON.stringify(this.toJSON());
     }
 }
